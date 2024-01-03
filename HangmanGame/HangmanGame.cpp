@@ -12,8 +12,8 @@ void PrintHeader(std::string message, bool printTop = true, bool printBottom = t
     else
     {
         std::cout << "|";
-    
 
+    }
     // Use a boolean to keep alternately add spaces around the message to center it
     bool front = true;
 
