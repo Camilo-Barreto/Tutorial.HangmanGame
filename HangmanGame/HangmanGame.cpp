@@ -3,8 +3,16 @@
 void PrintHeader(std::string message, bool printTop = true, bool printBottom = true)
 {
     // The following will print the top of the header
-    std::cout << "+---------------------------------+" << std::endl;
-    std::cout << "|"; 
+    // else just print the border
+    if (printTop)
+    {
+        std::cout << "+---------------------------------+" << std::endl;
+        std::cout << "|";
+    }
+    else
+    {
+        std::cout << "|";
+    
 
     // Use a boolean to keep alternately add spaces around the message to center it
     bool front = true;
@@ -34,11 +42,15 @@ void PrintHeader(std::string message, bool printTop = true, bool printBottom = t
     std::cout << message; 
 
     // Now close the header box as per the GUI visualisatuion below
+    // else if not needed just print the border
     if (printBottom)
     {
         std::cout << "|" << std::endl; // use endl to move to the next line 
         std::cout << "+---------------------------------+" << std::endl;
-
+    }
+    else
+    {
+        std::cout << "|" << std::endl;
     }
  }
 
