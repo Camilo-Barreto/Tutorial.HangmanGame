@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
 
 void PrintHeader(std::string message, bool printTop = true, bool printBottom = true)
 {
@@ -157,6 +160,41 @@ bool PrintWordAndCheckResult(std::string answerWord, std::string userGuess)
 
     return won;
 }
+
+std::string LoadRandomWord(std::string path)
+{
+
+    int lineCount = 0;
+    
+    // To store the random word
+    std::string word;
+
+    // Vector to store words from txt file
+    std::vector<std::string> wordVector;
+
+    std::ifstream reader(path);
+
+    // If file was successfuklly opened
+    if (reader.is_open())
+    {
+        while (std::getline(reader, word))
+        {
+            wordVector.push_back(word);
+        }
+
+        // Random number selector
+        int randomLine = rand() % wordVector.size();
+
+        // Using .at will check for out of bounds error and throw a expection
+        // Whereas the standard way used for arrays wont check if within bounds
+        word = wordVector.at(randomLine);
+
+        // Close the reader
+        reader.close();
+    }
+    return word;
+}
+
 int main()
 {
     std::string userInput = "TEIMS";
