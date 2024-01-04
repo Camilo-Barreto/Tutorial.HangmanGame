@@ -54,9 +54,55 @@ void PrintHeader(std::string message, bool printTop = true, bool printBottom = t
     }
  }
 
+void DrawHangman(int guessCounter = 0)
+{
+    // Draw new parts for each wrong guess
+    if (guessCounter >= 1)
+        PrintHeader("|", false, false);
+    else
+        PrintHeader("", false, false);
+
+    if (guessCounter >= 2)
+        PrintHeader("|", false, false);
+    else
+        PrintHeader("", false, false);
+
+    if (guessCounter >= 3)
+        PrintHeader("O", false, false);
+    else
+        PrintHeader("", false, false);
+
+    if (guessCounter == 4)
+        PrintHeader("/  ", false, false);
+
+    if (guessCounter == 5)
+        PrintHeader("/| ", false, false);
+
+    if (guessCounter >= 6)
+        PrintHeader("/|\\", false, false);
+    else
+        PrintHeader("", false, false);
+
+    if (guessCounter >= 7)
+        PrintHeader("|", false, false);
+    else
+        PrintHeader("", false, false);
+
+    if (guessCounter == 8)
+        PrintHeader("/  ", false, false);
+
+    if (guessCounter >= 9)
+        PrintHeader("/ \\", false, false);
+    else
+        PrintHeader("", false, false);
+}
+
 int main()
 {
+    // Print the header
     PrintHeader("Hang Man");
+    // draw the body
+    DrawHangman();
 
     return 0;
 
