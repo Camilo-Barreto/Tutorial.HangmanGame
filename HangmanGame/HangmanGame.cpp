@@ -97,15 +97,79 @@ void DrawHangman(int guessCounter = 0)
         PrintHeader("", false, false);
 }
 
+void PrintLetters(std::string input, char from, char to)
+{
+    std::string letters;
+    
+    // print letters using ascii values from {from} to {to}
+    for (int i = from; i <= to; i++)
+    {
+        // if letter wasnt found print it to console as it can be used
+        if (input.find(i) == std::string::npos)
+        {
+            letters += i;
+            letters += " ";
+        }
+        else
+        {
+            // Remove the letter from available list as it was used
+            letters += "  ";
+        }
+    }
+    // Finally, print the letters available
+    PrintHeader(letters, false, false);
+}
+
+void PrintAvailableLetters(std::string usedLetters)
+{
+    // Draw the header from design
+    PrintHeader("Available letters");
+    PrintLetters(usedLetters, 'A', 'M');
+    PrintLetters(usedLetters, 'N', 'Z'); 
+}
+
+bool PrintWordAndCheckResult(std::string answerWord, std::string userGuess)
+{
+    // Assuming user won
+    bool won = true;
+    std::string resultPrint;
+
+    // if word doesnt match with the guess change bool to lost
+    for (int i = 0; i < answerWord.length(); i++)
+    {
+        if (answerWord.find(userGuess[i]) == std::string::npos)
+        {
+            // The letter doesnt match in both words for that position
+            // The word guessed is wrong
+            // So, print a blank space and change won boolean
+            won = false;
+            resultPrint += "_ ";
+        }
+        else
+        {
+            resultPrint += answerWord[i];
+            // Add a space after the letter
+            resultPrint += " ";
+        }
+    }
+    // Print the answer with blanks and dont draw top border
+    PrintHeader(resultPrint, false);
+
+    return won;
+}
 int main()
 {
+    std::string userInput = "TEIMS";
     // Print the header
     PrintHeader("Hang Man");
     // draw the body
-    DrawHangman();
+    DrawHangman(9);
+    // Print remaining letters
+    PrintAvailableLetters(userInput);
+    PrintHeader("Guess the Word");
+    PrintWordAndCheckResult("RHINO", userInput);
 
     return 0;
-
 }
 
 /*
